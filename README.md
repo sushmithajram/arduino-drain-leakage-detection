@@ -1,15 +1,9 @@
-/* author             : j.sushmitha
- * thanks and credits : teachers and seniors of iota batch3
-DRAIN WATER LEAKAGE DETECTION 
-alert after detecting water leakage in drain pipe
-connect usb cabe of arduino to pc
-2nd digital pin of uno to water flow sensor
- */
+
 const int buzzer     = 9;
 byte statusLed       = 13;
 byte sensorInterrupt = 0; 
 byte sensorPin       = 2;
-float calibrationFactor = 4.5;                                                      //The hall-effect flow sensor outputs approximately 4.5 pulses per second per litre/minute of flow.
+float calibrationFactor = 4.5;             
 volatile byte pulseCount;  
 float flowRate;
 unsigned int flowMilliLitres;
@@ -18,10 +12,10 @@ unsigned long oldTime;
 
 void setup()
 {
-  Serial.begin(9600);                                                                 // Initialize a serial connection for reporting values to the host
-  pinMode(buzzer,OUTPUT);                                                             // Set up the Buzzer line as an output
-  pinMode(statusLed, OUTPUT);                                                         // Set up the status LED line as an output
-  digitalWrite(statusLed, HIGH);                                                      // We have an active-low LED attached
+  Serial.begin(9600);                                                                 
+  pinMode(buzzer,OUTPUT);                                                             
+  pinMode(statusLed, OUTPUT);                                                        
+  digitalWrite(statusLed, HIGH);                                                      
   pinMode(sensorPin, INPUT);
   digitalWrite(sensorPin, HIGH);                                                      // make waterflow sensor pin active
 
@@ -31,7 +25,7 @@ void setup()
   totalMilliLitres  = 0;
   oldTime           = 0;
   
-  attachInterrupt(sensorInterrupt, pulseCounter, FALLING);                            // sensor 2 pin uses interrupt (FALLING - change of state from low to high
+  attachInterrupt(sensorInterrupt, pulseCounter, FALLING);                             
 }
 
 /**
